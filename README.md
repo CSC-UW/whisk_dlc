@@ -34,10 +34,15 @@ separately (external drive, Box, OneDrive, network share).
    package versions from `uv.lock`:
 
    ```powershell
-   git clone <repo URL> whisker_dlc
-   cd whisker_dlc
+   git config --global core.longpaths true
+   git clone <repo URL> C:\whisker_dlc
+   cd C:\whisker_dlc
    uv sync
    ```
+
+   Some DLC file names are long; without `core.longpaths`, cloning into a deep
+   folder fails with "Filename too long". A short location like `C:\whisker_dlc`
+   avoids it either way.
 
 3. Check that PyTorch sees the GPU:
 
@@ -45,8 +50,9 @@ separately (external drive, Box, OneDrive, network share).
    uv run python -c "import torch; print(torch.cuda.is_available(), torch.cuda.get_device_name(0))"
    ```
 
-   If this prints `False`, the installed PyTorch is CPU-only or the driver is
-   missing. Analysis will still run, but very slowly.
+   `pyproject.toml` pulls PyTorch built for CUDA 12.6, which needs NVIDIA driver
+   560 or newer. If this prints `False`, update the driver. Without the GPU,
+   analysis still runs, but many times slower.
 
 ## Analyzing videos
 
@@ -58,13 +64,29 @@ Results (`<video>DLC_Resnet50_...h5`) are written next to each video. Options:
 
 | Option | Effect |
 |---|---|
-| `--crop X1 X2 Y1 Y2` | Analyze only this region; output coordinates stay full-frame. `80 640 260 540` covers the whisker and snout in the spica recordings. **Check that the tracked whisker never leaves the box.** |
-| `--batch-size N` | Frames per GPU batch. Try 8–32; too large runs out of GPU memory. |
-| `--autocast` | Half-precision inference: faster, predictions can shift by a fraction of a pixel. |
+| `--crop X1 X2 Y1 Y2` | Analyze only this region; saved coordinates are full-frame (the script adds the offset back, since DLC 3.0.1 doesn't). `80 640 256 540` covers the whisker and snout in the spica recordings. Keep X1 and Y1 multiples of 16. **Check that the tracked whisker never leaves the box.** |
+| `--batch-size N` | Frames per GPU batch. Made little difference on a 4 GB T1000 (8–64 all similar). |
 | `--dest FOLDER` | Write outputs to `FOLDER` instead of next to the videos. |
 | `--csv` | Also save a `.csv` copy of the results. |
 
-Multiple videos or wildcards work: `analyze.py D:\videos\*.mp4`.
+Multiple videos or wildcards work: `analyze.py D:\videos\*.mp4`. Videos that
+already have results are skipped.
+
+### Speed and cropping
+
+Measured on a 2,000-frame spica clip (720×540) with an NVIDIA T1000 (4 GB):
+
+| Setting | Frames/s | 1.21M-frame recording |
+|---|---|---|
+| Full frame | 13.7 | ~25 h |
+| `--crop 80 640 256 540` | 36 | ~9.5 h |
+
+A faster GPU scales roughly in proportion. Cropped predictions differ from
+full-frame ones by a median of 0.7 px (max 2.6 px), well below the model's
+~3.5 px error against hand labels.
+
+Half-precision inference (`autocast`) returned only NaNs on the T1000. Don't
+use it without checking the output.
 
 On first run, `analyze.py` sets `project_path` in
 `whisker_stim-LL-2026-08-24/config.yaml` to the clone's location. Commit that
