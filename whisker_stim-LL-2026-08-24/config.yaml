@@ -1,0 +1,144 @@
+# Config schema version. Do not edit manually.
+config_version: 0
+# Project definitions (do not edit)
+Task: whisker_stim
+scorer: LL
+date: Aug24
+multianimalproject: false
+identity:
+
+# Project path (change when moving around)
+project_path: C:\Users\lejonvarn\whisker_dlc\whisker_stim-LL-2026-08-24
+pose_config_path:
+
+# Default DeepLabCut engine to use for shuffle creation (either pytorch or tensorflow)
+engine: pytorch
+
+# Annotation data set configuration (and individual video cropping parameters)
+video_sets:
+  C:\Users\lejonvarn\whisker_dlc\whisker_stim-LL-2026-08-24\videos\W1S1.mp4:
+    crop: 0, 720, 0, 540
+  C:\Users\lejonvarn\whisker_dlc\whisker_stim-LL-2026-08-24\videos\W1S2.mp4:
+    crop: 0, 720, 0, 540
+  C:\Users\lejonvarn\whisker_dlc\whisker_stim-LL-2026-08-24\videos\W1S3.mp4:
+    crop: 0, 720, 0, 540
+  C:\Users\lejonvarn\whisker_dlc\whisker_stim-LL-2026-08-24\videos\W1S4.mp4:
+    crop: 0, 720, 0, 540
+  C:\Users\lejonvarn\whisker_dlc\whisker_stim-LL-2026-08-24\videos\W1S5.mp4:
+    crop: 0, 720, 0, 540
+  C:\Users\lejonvarn\whisker_dlc\whisker_stim-LL-2026-08-24\videos\W2S1.mp4:
+    crop: 0, 720, 0, 540
+  C:\Users\lejonvarn\whisker_dlc\whisker_stim-LL-2026-08-24\videos\W2S2.mp4:
+    crop: 0, 720, 0, 540
+  C:\Users\lejonvarn\whisker_dlc\whisker_stim-LL-2026-08-24\videos\W2S3.mp4:
+    crop: 0, 720, 0, 540
+  C:\Users\lejonvarn\whisker_dlc\whisker_stim-LL-2026-08-24\videos\W2S4.mp4:
+    crop: 0, 720, 0, 540
+  C:\Users\lejonvarn\whisker_dlc\whisker_stim-LL-2026-08-24\videos\W2S5.mp4:
+    crop: 0, 720, 0, 540
+  C:\Users\lejonvarn\whisker_dlc\whisker_stim-LL-2026-08-24\videos\W3S1.mp4:
+    crop: 0, 720, 0, 540
+  C:\Users\lejonvarn\whisker_dlc\whisker_stim-LL-2026-08-24\videos\W3S2.mp4:
+    crop: 0, 720, 0, 540
+  C:\Users\lejonvarn\whisker_dlc\whisker_stim-LL-2026-08-24\videos\W3S3.mp4:
+    crop: 0, 720, 0, 540
+  C:\Users\lejonvarn\whisker_dlc\whisker_stim-LL-2026-08-24\videos\W3S4.mp4:
+    crop: 0, 720, 0, 540
+  C:\Users\lejonvarn\whisker_dlc\whisker_stim-LL-2026-08-24\videos\W4S1.mp4:
+    crop: 0, 720, 0, 540
+  C:\Users\lejonvarn\whisker_dlc\whisker_stim-LL-2026-08-24\videos\W5S1.mp4:
+    crop: 0, 720, 0, 540
+  C:\Users\lejonvarn\whisker_dlc\whisker_stim-LL-2026-08-24\videos\W5S10.mp4:
+    crop: 0, 720, 0, 540
+  C:\Users\lejonvarn\whisker_dlc\whisker_stim-LL-2026-08-24\videos\W5S11.mp4:
+    crop: 0, 720, 0, 540
+  C:\Users\lejonvarn\whisker_dlc\whisker_stim-LL-2026-08-24\videos\W5S12.mp4:
+    crop: 0, 720, 0, 540
+  C:\Users\lejonvarn\whisker_dlc\whisker_stim-LL-2026-08-24\videos\W5S2.mp4:
+    crop: 0, 720, 0, 540
+  C:\Users\lejonvarn\whisker_dlc\whisker_stim-LL-2026-08-24\videos\W5S3.mp4:
+    crop: 0, 720, 0, 540
+  C:\Users\lejonvarn\whisker_dlc\whisker_stim-LL-2026-08-24\videos\W5S4.mp4:
+    crop: 0, 720, 0, 540
+  C:\Users\lejonvarn\whisker_dlc\whisker_stim-LL-2026-08-24\videos\W5S5.mp4:
+    crop: 0, 720, 0, 540
+  C:\Users\lejonvarn\whisker_dlc\whisker_stim-LL-2026-08-24\videos\W5S6.mp4:
+    crop: 0, 720, 0, 540
+  C:\Users\lejonvarn\whisker_dlc\whisker_stim-LL-2026-08-24\videos\W5S7.mp4:
+    crop: 0, 720, 0, 540
+  C:\Users\lejonvarn\whisker_dlc\whisker_stim-LL-2026-08-24\videos\W5S8.mp4:
+    crop: 0, 720, 0, 540
+  C:\Users\lejonvarn\whisker_dlc\whisker_stim-LL-2026-08-24\videos\W5S9.mp4:
+    crop: 0, 720, 0, 540
+  C:\Users\lejonvarn\whisker_dlc\whisker_stim-LL-2026-08-24\videos\W6S1.mp4:
+    crop: 0, 720, 0, 540
+  C:\Users\lejonvarn\whisker_dlc\whisker_stim-LL-2026-08-24\videos\W7S1.mp4:
+    crop: 0, 720, 0, 540
+  C:\Users\lejonvarn\whisker_dlc\whisker_stim-LL-2026-08-24\videos\W7S2.mp4:
+    crop: 0, 720, 0, 540
+  C:\Users\lejonvarn\whisker_dlc\whisker_stim-LL-2026-08-24\videos\W7S3.mp4:
+    crop: 0, 720, 0, 540
+  C:\Users\lejonvarn\whisker_dlc\whisker_stim-LL-2026-08-24\videos\W7S4.mp4:
+    crop: 0, 720, 0, 540
+  C:\Users\lejonvarn\whisker_dlc\whisker_stim-LL-2026-08-24\videos\W7S5.mp4:
+    crop: 0, 720, 0, 540
+  C:\Users\lejonvarn\whisker_dlc\whisker_stim-LL-2026-08-24\videos\spica-20261007_160406-cam2.mp4:
+    crop: 0, 720, 0, 540
+bodyparts:
+- whisker_base
+- blob_start
+- blob_end
+- whisker_tip
+- tip_blob_midpoint
+- blob_base_midpoint
+- snout tip
+individuals:
+- individual_1
+uniquebodyparts: []
+multianimalbodyparts: []
+
+# Fraction of video to start/stop when extracting frames for labeling/refinement
+start: 0.0
+stop: 1.0
+numframes2pick: 20
+
+# Plotting configuration
+skeleton: []
+skeleton_color: black
+pcutoff: 0.6
+dotsize: 12
+alphavalue: 0.7
+colormap: rainbow
+
+# Training,Evaluation and Analysis configuration
+TrainingFraction:
+- 0.95
+iteration: 0
+default_net_type: resnet_50
+default_augmenter: default
+default_track_method:
+snapshotindex: -1
+detector_snapshotindex: -1
+batch_size: 8
+detector_batch_size: 1
+
+# Cropping Parameters (for analysis and outlier frame detection)
+cropping: false
+# if cropping is true for analysis, then set the values here:
+x1: 0
+x2: 640
+y1: 277
+y2: 624
+
+# Refinement configuration (parameters from annotation dataset configuration also relevant in this stage)
+corner2move2:
+- 50
+- 50
+move2corner: true
+
+# Conversion tables to fine-tune SuperAnimal weights
+SuperAnimalConversionTables:
+
+# These are very old parameters that are no longer used They are simply ignored.
+resnet:
+croppedtraining:

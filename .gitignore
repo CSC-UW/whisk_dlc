@@ -1,0 +1,36 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+.venv
+
+# Only the whisker_stim project is tracked; other projects and the stray
+# top-level DLC config stay local.
+/whiskertest3-LL-2026-09-03/
+/config.yaml
+/main.py
+
+# Videos are far too large for GitHub (up to 7.5 GB each) -- copy them separately.
+whisker_stim-LL-2026-08-24/videos/
+*.mp4
+*.avi
+
+# check_labels overlays; regenerate with deeplabcut.check_labels(config)
+whisker_stim-LL-2026-08-24/labeled-data/*_labeled/
+
+# Keep only the best snapshot (~95 MB each, GitHub's per-file limit is 100 MB)
+whisker_stim-LL-2026-08-24/dlc-models-pytorch/**/train/old_snapshots/
+whisker_stim-LL-2026-08-24/dlc-models-pytorch/**/train/snapshot-*.pt
+!whisker_stim-LL-2026-08-24/dlc-models-pytorch/**/train/snapshot-best-060.pt
+
+# Analysis outputs
+*.h5
+!whisker_stim-LL-2026-08-24/labeled-data/**/*.h5
+!whisker_stim-LL-2026-08-24/training-datasets/**/*.h5
+*_full.pickle
+*_meta.pickle

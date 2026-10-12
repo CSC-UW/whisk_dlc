@@ -1,0 +1,28 @@
+[project]
+name = "whisker-dlc"
+version = "0.1.0"
+description = "DeepLabCut whisker tracking (whisker_stim project)"
+readme = "README.md"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+    "deeplabcut[gui]>=3.0.1",
+    "torch==2.13.0",
+    "torchvision==0.28.0",
+]
+
+[tool.uv]
+# DLC 3.0.1 pins qdarkstyle==3.1, but calls load_stylesheet_pyside6(), which only
+# exists from 3.2 on. Without the override the GUI logs a warning and falls back
+# to the PySide2 stylesheet on every launch.
+override-dependencies = ["qdarkstyle>=3.2"]
+
+# PyPI's Windows torch wheels are CPU-only, so training and analysis silently ran
+# on the CPU. Pull CUDA 12.6 builds instead (needs NVIDIA driver >= 560).
+[tool.uv.sources]
+torch = { index = "pytorch-cu126" }
+torchvision = { index = "pytorch-cu126" }
+
+[[tool.uv.index]]
+name = "pytorch-cu126"
+url = "https://download.pytorch.org/whl/cu126"
+explicit = true

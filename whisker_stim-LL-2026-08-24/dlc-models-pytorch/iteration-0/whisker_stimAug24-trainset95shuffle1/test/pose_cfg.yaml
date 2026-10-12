@@ -1,0 +1,22 @@
+dataset: C:\Users\lejonvarn\whisker_dlc\whisker_stim-LL-2026-08-24
+num_joints: 7
+all_joints:
+- - 0
+- - 1
+- - 2
+- - 3
+- - 4
+- - 5
+- - 6
+all_joints_names:
+- whisker_base
+- blob_start
+- blob_end
+- whisker_tip
+- tip_blob_midpoint
+- blob_base_midpoint
+- snout tip
+net_type: resnet_50
+dataset_type: multi-animal-imgaug
+global_scale: 1.0
+scoremap_dir: test
