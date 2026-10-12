@@ -101,6 +101,27 @@ uv run python -c "import deeplabcut; deeplabcut.create_labeled_video(r'whisker_s
 Skip this for full-length recordings; rendering 1M+ frames takes about as long
 as the analysis.
 
+`analyze.py` changes `project_path` only while it runs and restores
+`config.yaml` afterwards, so the working tree stays clean for `git pull`.
+
+## Updating the model
+
+After labeling new videos and retraining (fine-tune from the current
+`snapshot-best-*.pt` with `snapshot_path=`), commit the new model in place of
+the old one:
+
+```powershell
+$train = "whisker_stim-LL-2026-08-24\dlc-models-pytorch\iteration-0\whisker_stimAug24-trainset95shuffle1\train"
+git rm "$train\snapshot-best-060.pt"          # the previous model
+git add -A                                    # new snapshot, labels, training set, config
+git commit -m "Retrain with <new videos>"
+git push
+```
+
+Only `snapshot-best-*.pt` files are tracked; other snapshots are ignored.
+Each model is ~91 MB and stays in the Git history permanently, which is fine
+for occasional updates. On the analysis PC, `git pull` picks up the new model.
+
 ## Using the GUI
 
 `uv run python -m deeplabcut` starts the GUI. If it crashes on startup, run

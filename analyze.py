@@ -1,8 +1,8 @@
 """Run the trained whisker_stim model on one or more videos.
 
 The project's config.yaml stores an absolute `project_path`, and DeepLabCut uses
-it to find the model. This script first points it at wherever the repo lives on
-this machine, so a fresh clone works without hand-editing the config.
+it to find the model. This script temporarily points it at wherever the repo
+lives on this machine, so a fresh clone works without hand-editing the config.
 
     uv run python analyze.py D:\\videos\\spica-20261007_160406-cam2.mp4
     uv run python analyze.py D:\\videos\\*.mp4 --crop 80 640 256 540
@@ -16,6 +16,7 @@ import argparse
 import glob
 import sys
 import time
+from contextlib import contextmanager
 from pathlib import Path
 
 PROJECT = Path(__file__).resolve().parent / "whisker_stim-LL-2026-08-24"
@@ -24,14 +25,23 @@ CONFIG = PROJECT / "config.yaml"
 GRID = 16
 
 
-def relocate_project() -> None:
-    """Point config.yaml's project_path at this checkout, if it isn't already."""
+@contextmanager
+def relocated_project():
+    """Point config.yaml's project_path at this checkout for the duration of the run.
+
+    The original file is restored afterwards so the working tree stays clean and
+    `git pull` never conflicts on config.yaml.
+    """
     from deeplabcut.utils import auxiliaryfunctions
 
+    original = CONFIG.read_bytes()
     cfg = auxiliaryfunctions.read_config(str(CONFIG))
     if Path(cfg["project_path"]) != PROJECT:
         auxiliaryfunctions.edit_config(str(CONFIG), {"project_path": str(PROJECT)})
-        print(f"project_path updated to {PROJECT}")
+    try:
+        yield
+    finally:
+        CONFIG.write_bytes(original)
 
 
 def shift_to_full_frame(result: Path, x1: int, y1: int) -> None:
@@ -70,17 +80,17 @@ def main() -> int:
 
     import deeplabcut
 
-    relocate_project()
     started = time.time()
-    scorer = deeplabcut.analyze_videos(
-        str(CONFIG),
-        [str(v) for v in videos],
-        shuffle=1,
-        batch_size=args.batch_size,
-        cropping=args.crop,
-        destfolder=args.dest,
-        save_as_csv=args.csv,
-    )
+    with relocated_project():
+        scorer = deeplabcut.analyze_videos(
+            str(CONFIG),
+            [str(v) for v in videos],
+            shuffle=1,
+            batch_size=args.batch_size,
+            cropping=args.crop,
+            destfolder=args.dest,
+            save_as_csv=args.csv,
+        )
 
     if args.crop:
         for v in videos:

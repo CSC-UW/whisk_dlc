@@ -23,10 +23,11 @@ whisker_stim-LL-2026-08-24/videos/
 # check_labels overlays; regenerate with deeplabcut.check_labels(config)
 whisker_stim-LL-2026-08-24/labeled-data/*_labeled/
 
-# Keep only the best snapshot (~95 MB each, GitHub's per-file limit is 100 MB)
+# Keep only the best snapshot (~95 MB each, GitHub's per-file limit is 100 MB).
+# After retraining, `git rm` the previous best so only one model is tracked.
 whisker_stim-LL-2026-08-24/dlc-models-pytorch/**/train/old_snapshots/
 whisker_stim-LL-2026-08-24/dlc-models-pytorch/**/train/snapshot-*.pt
-!whisker_stim-LL-2026-08-24/dlc-models-pytorch/**/train/snapshot-best-060.pt
+!whisker_stim-LL-2026-08-24/dlc-models-pytorch/**/train/snapshot-best-*.pt
 
 # Analysis outputs
 *.h5
